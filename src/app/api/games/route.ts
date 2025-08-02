@@ -21,8 +21,8 @@ export async function GET(request: Request) {
   await delay(2000);
 
   const toIndex = page * ITEMS_PER_PAGE;
-  games = games.slice(0, toIndex);
   const totalPages = Math.ceil(games.length / ITEMS_PER_PAGE);
+  games = games.slice(0, toIndex);
 
   return Response.json({ games, availableFilters, totalPages });
 }
