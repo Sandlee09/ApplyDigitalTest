@@ -33,6 +33,9 @@ export default function SeeMoreButton({
     restoreScroll();
   };
 
+  console.log("currentPage", currentPage);
+  console.log("totalPages", totalPages);
+
   if (currentPage >= totalPages) {
     return null;
   }
