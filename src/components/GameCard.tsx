@@ -1,6 +1,25 @@
+"use client";
+
 import { Game } from "@/services/api";
+import { useCart } from "@/contexts/CartContext";
+import { useEffect, useState } from "react";
 
 export default function GameCard({ game }: { game: Game }) {
+  const { addItem, removeItem, isItemInCart, cart } = useCart();
+  const [itemInCart, setItemInCart] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    setItemInCart(isItemInCart(game.id));
+  }, [game.id, isItemInCart]);
+
+  // Update itemInCart when cart changes
+  useEffect(() => {
+    if (isClient) {
+      setItemInCart(isItemInCart(game.id));
+    }
+  }, [cart, game.id, isItemInCart, isClient]);
   return (
     <div
       key={game.id}
@@ -28,8 +47,15 @@ export default function GameCard({ game }: { game: Game }) {
             ${game.price}
           </span>
         </div>
-        <button className="text-grayTitle px-4 py-2 rounded-md border border-black w-full mt-auto font-bold shadow-md">
-          Add to Cart
+        <button
+          onClick={() => (itemInCart ? removeItem(game.id) : addItem(game))}
+          className={`px-4 py-2 rounded-md border w-full mt-auto font-bold shadow-md transition-colors ${
+            itemInCart
+              ? "text-red-600 border-red-600 hover:bg-red-50"
+              : "text-grayTitle border-black hover:bg-gray-50"
+          }`}
+        >
+          {isClient && itemInCart ? "Remove" : "Add to Cart"}
         </button>
       </div>
     </div>
