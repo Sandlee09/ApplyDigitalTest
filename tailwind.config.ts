@@ -16,6 +16,7 @@ const config: Config = {
       colors: {
         lightBackground: "rgb(244 244 245)",
         grayTitle: "rgb(82 82 91)",
+        lightGrayText: "#737373",
       },
       fontFamily: {
         area: ["Area Normal", "sans-serif"],
