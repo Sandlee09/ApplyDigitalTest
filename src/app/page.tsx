@@ -1,16 +1,29 @@
 import GameCard from "@/components/GameCard";
+import CatalogHeader from "@/components/CatalogHeader";
 import { fetchGames } from "@/services/api";
 
-export default async function Home() {
-  const { games, availableFilters, totalPages, currentPage } =
-    await fetchGames();
+interface PageProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default async function Home({ searchParams }: PageProps) {
+  const genre =
+    typeof searchParams.genre === "string" ? searchParams.genre : undefined;
+  const page =
+    typeof searchParams.page === "string" ? parseInt(searchParams.page) : 1;
+
+  const { games, availableFilters, totalPages, currentPage } = await fetchGames(
+    genre,
+    page
+  );
 
   return (
-    <main className="flex-1 p-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-12">
+    <main className="">
+      <CatalogHeader availableFilters={availableFilters} currentGenre={genre} />
+      <div className="max-w-7xl mx-auto flex-1 p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {games.map((game) => (
-            <GameCard game={game} />
+            <GameCard key={game.id} game={game} />
           ))}
         </div>
       </div>

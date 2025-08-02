@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Header() {
+export default function NavBar() {
   return (
     <header className="h-16 bg-lightBackground text-white flex items-center justify-between px-20">
       <div className="text-2xl font-semibold text-grayTitle font-area">
