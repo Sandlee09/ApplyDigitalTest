@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
+import LoadingSpinner from "./LoadingSpinner";
 
 interface CatalogHeaderProps {
   availableFilters: string[];
@@ -15,7 +16,13 @@ export default function CatalogHeader({
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Reset loading state when search params change (navigation completes)
+  useEffect(() => {
+    setIsLoading(false);
+  }, [searchParams]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -34,6 +41,7 @@ export default function CatalogHeader({
   }, []);
 
   const handleGenreChange = (genre: string) => {
+    setIsLoading(true);
     const params = new URLSearchParams(searchParams);
 
     if (genre === "All") {
@@ -65,9 +73,14 @@ export default function CatalogHeader({
             <div className="w-[2px] h-4 bg-gray-300"></div>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="flex items-center space-x-1 text-gray-500 text-xl hover:text-gray-700 transition-colors"
+              disabled={isLoading}
+              className="flex items-center space-x-1 text-gray-500 text-xl hover:text-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span>{currentGenre || "All"}</span>
+              {isLoading ? (
+                <LoadingSpinner size="sm" />
+              ) : (
+                <span>{currentGenre || "All"}</span>
+              )}
               <svg
                 className={`w-4 h-4 transition-transform ${
                   isOpen ? "rotate-180" : ""

@@ -10,7 +10,7 @@ export default function GameCard({ game }: { game: Game }) {
         <img
           src={game.image}
           alt={game.name}
-          className="w-full h-48 object-cover rounded-t-[16px] border border-zinc-100"
+          className="w-full h-48 object-fill rounded-t-[16px] border border-zinc-100"
         />
         {game.isNew && (
           <div className="absolute top-2 left-2 bg-white text-grayTitle border border-zinc-200 px-2 py-1 rounded text-sm">

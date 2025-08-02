@@ -15,8 +15,6 @@ export interface GamesResponse {
   currentPage: number;
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-
 export async function fetchGames(
   genre?: string,
   page: number = 1
@@ -31,16 +29,14 @@ export async function fetchGames(
     params.append("page", page.toString());
   }
 
+  // Use absolute URL for server-side rendering
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
   const url = `${baseUrl}/api/games${
     params.toString() ? `?${params.toString()}` : ""
   }`;
 
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(url);
 
   if (!response.ok) {
     throw new Error("Failed to fetch games");

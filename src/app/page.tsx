@@ -1,5 +1,6 @@
 import GameCard from "@/components/GameCard";
 import CatalogHeader from "@/components/CatalogHeader";
+import SeeMoreButton from "@/components/SeeMoreButton";
 import { fetchGames } from "@/services/api";
 
 interface PageProps {
@@ -12,10 +13,7 @@ export default async function Home({ searchParams }: PageProps) {
   const page =
     typeof searchParams.page === "string" ? parseInt(searchParams.page) : 1;
 
-  const { games, availableFilters, totalPages, currentPage } = await fetchGames(
-    genre,
-    page
-  );
+  const { games, availableFilters, totalPages } = await fetchGames(genre, page);
 
   return (
     <main className="">
@@ -25,6 +23,9 @@ export default async function Home({ searchParams }: PageProps) {
           {games.map((game) => (
             <GameCard key={game.id} game={game} />
           ))}
+        </div>
+        <div className="flex justify-start mt-8">
+          <SeeMoreButton currentPage={page} totalPages={totalPages} />
         </div>
       </div>
     </main>

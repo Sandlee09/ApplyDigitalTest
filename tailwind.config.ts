@@ -15,6 +15,7 @@ const config: Config = {
       },
       colors: {
         lightBackground: "rgb(244 244 245)",
+        darkBackground: "#404040",
         grayTitle: "rgb(82 82 91)",
         lightGrayText: "#737373",
       },
