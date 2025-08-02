@@ -11,7 +11,7 @@ const CartItem = ({
   return (
     <div
       key={item.id}
-      className="relative flex items-center pl-6 py-6 border-b border-gray-300 last:border-b-0 gap-2"
+      className="relative flex flex-col lg:flex-row lg:items-center lg:pl-6 py-6 border-b border-gray-300 last:border-b-0 gap-2"
     >
       <div className="flex-shrink-0 mr-4">
         <Image
@@ -22,7 +22,7 @@ const CartItem = ({
           className="w-64 h-40 object-cover"
         />
       </div>
-      <div className="flex flex-col w-full px-6">
+      <div className="flex flex-col w-full lg:px-6">
         <button
           onClick={() => removeItem(item.id)}
           className="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors p-1"

@@ -72,13 +72,13 @@ export default function CatalogHeader({
         </div>
       )}
       <div className="mb-8 flex flex-col">
-        <div className="flex justify-between items-center mb-4 flex-col py-8">
-          <div className="flex w-full px-20 py-8">
+        <div className="flex justify-between lg:items-center mb-4 flex-col py-8">
+          <div className="flex w-full px-4 lg:px-20 py-2 lg:py-8">
             <h1 className="text-4xl font-bold text-gray-800">Top Sellers</h1>
           </div>
 
           <div
-            className="relative w-full flex justify-end px-20"
+            className="relative w-full flex mt-8 lg:mt-0 lg:justify-end px-4 lg:px-20"
             ref={dropdownRef}
           >
             <div className="flex items-center space-x-2">

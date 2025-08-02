@@ -16,7 +16,7 @@ export default function NavBar() {
     setCartCount(getCartItemCount());
   }, [cart]);
   return (
-    <header className="h-16 bg-lightBackground text-white flex items-center justify-between px-20">
+    <header className="h-16 bg-lightBackground text-white flex items-center justify-between px-4 lg:px-20">
       <div className="text-2xl font-semibold text-grayTitle font-area">
         GamerShop
       </div>
