@@ -14,7 +14,6 @@ export default function GameCard({ game }: { game: Game }) {
     setItemInCart(isItemInCart(game.id));
   }, [game.id, isItemInCart]);
 
-  // Update itemInCart when cart changes
   useEffect(() => {
     if (isClient) {
       setItemInCart(isItemInCart(game.id));
@@ -42,7 +41,12 @@ export default function GameCard({ game }: { game: Game }) {
           {game.genre}
         </h3>
         <div className="flex justify-between items-center gap-12 mb-4">
-          <span className="text-lg font-bold text-grayTitle">{game.name}</span>
+          <span
+            className="text-lg font-bold text-grayTitle line-clamp-2 cursor-help"
+            title={game.name}
+          >
+            {game.name}
+          </span>
           <span className="text-lg font-bold text-grayTitle">
             ${game.price}
           </span>

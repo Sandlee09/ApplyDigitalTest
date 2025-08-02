@@ -52,7 +52,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     isVisible: false,
   });
 
-  // Load cart from localStorage on mount
   useEffect(() => {
     const savedCart = getCartFromStorage();
     setCart(savedCart);

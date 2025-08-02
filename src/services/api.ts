@@ -29,7 +29,6 @@ export async function fetchGames(
     params.append("page", page.toString());
   }
 
-  // Use absolute URL for server-side rendering
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const url = `${baseUrl}/api/games${

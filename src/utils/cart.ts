@@ -35,10 +35,8 @@ export const addToCart = (game: Game): CartItem[] => {
   );
 
   if (existingItemIndex >= 0) {
-    // Item already exists, increase quantity
     currentCart[existingItemIndex].quantity += 1;
   } else {
-    // Add new item
     currentCart.push({ ...game, quantity: 1 });
   }
 

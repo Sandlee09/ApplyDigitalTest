@@ -2,7 +2,6 @@
 
 import { useCart } from "@/contexts/CartContext";
 import Link from "next/link";
-import Image from "next/image";
 import OrderSummary from "@/components/OrderSummary";
 import CartItem from "@/components/CartItem";
 

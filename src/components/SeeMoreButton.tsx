@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { preserveScrollPosition } from "@/utils/scrollPreservation";
 import { useState, useEffect } from "react";
 import LoadingSpinner from "./LoadingSpinner";
+import { useLoading } from "@/contexts/LoadingContext";
 
 interface SeeMoreButtonProps {
   currentPage: number;
@@ -16,12 +17,11 @@ export default function SeeMoreButton({
 }: SeeMoreButtonProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, setIsLoading } = useLoading();
 
-  // Reset loading state when search params change (navigation completes)
   useEffect(() => {
     setIsLoading(false);
-  }, [searchParams]);
+  }, [searchParams, isLoading]);
 
   const handleSeeMore = () => {
     setIsLoading(true);
@@ -33,7 +33,6 @@ export default function SeeMoreButton({
     restoreScroll();
   };
 
-  // Only show the button if there are more pages available
   if (currentPage >= totalPages) {
     return null;
   }

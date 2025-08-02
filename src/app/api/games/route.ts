@@ -10,7 +10,7 @@ export async function GET(request: Request) {
 
   let games = allGames;
 
-  if (genre) {
+  if (genre && genre.toLowerCase() !== "all") {
     games = games.filter(
       (game) => game.genre.toLowerCase() === genre.toLowerCase()
     );
@@ -18,7 +18,6 @@ export async function GET(request: Request) {
 
   if (page < 1 || isNaN(page)) page = 1;
 
-  // Mock a delay to simulate a real API
   await delay(2000);
 
   const toIndex = page * ITEMS_PER_PAGE;
